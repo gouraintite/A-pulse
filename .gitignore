@@ -1,0 +1,45 @@
+# ============= .NET =============
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+.vs/
+appsettings.Development.json
+appsettings.Local.json
+*.pfx
+*.key
+
+# ============= Node / React =============
+node_modules/
+dist/
+build/
+.cache/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============= IDE =============
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# ============= OS =============
+.DS_Store
+Thumbs.db
+
+# ============= Env / Secrets =============
+.env
+.env.local
+.env.*.local
+
+# ============= Docker =============
+*.local.yml
+
+# ============= Tests / Coverage =============
+coverage/
+TestResults/
+*.coverage
+*.coveragexml
