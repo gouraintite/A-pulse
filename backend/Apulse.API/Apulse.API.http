@@ -1,0 +1,6 @@
+@Apulse.API_HostAddress = http://localhost:5264
+
+GET {{Apulse.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
