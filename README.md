@@ -19,15 +19,6 @@ axa-pulse/
 |-- .github/ -> Versionning, workflow CI/CD github action
 \`\`\`
 
-\`\`\`
-axa-pulse/
-├── backend/        → API ASP.NET Core 8 (C#)
-├── frontend/       → SPA React 19 + TypeScript
-├── docker/         → Dockerfiles et docker-compose
-├── docs/           → Documentation technique
-└── .github/        → Workflows CI/CD GitHub Actions
-\`\`\`
-
 ##Stack technique
 
 ### Backend
