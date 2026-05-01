@@ -53,9 +53,7 @@ TemporaryDependencyNodeTargetIdentifier=net8.0
 /warnaserror+:NU1605,SYSLIB0011
 
 [sourceFiles]
-Controllers/
- UserController.cs
- WeatherForecastController.cs
+Controllers/UserController.cs
 Data/APulseDbContext.cs
 Migrations/
  20260501114335_InitialCreate.cs
@@ -67,7 +65,6 @@ obj/Debug/net8.0/
  Apulse.API.AssemblyInfo.cs
  Apulse.API.GlobalUsings.g.cs
 Program.cs
-WeatherForecast.cs
 
 [metadataReferences]
 ../../../../../../../../usr/lib/dotnet/packs/Microsoft.AspNetCore.App.Ref/8.0.26/ref/net8.0/
