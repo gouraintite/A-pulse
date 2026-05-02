@@ -2,12 +2,14 @@
 using Apulse.Api.Data;
 using Apulse.Api.Dtos.Auth;
 using Apulse.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Apulse.Api.Controllers;
 
 [ApiController]
+[Authorize(Roles = "Admin")]
 [Route("api/[controller]")]
 
 public class AuthController: ControllerBase
@@ -29,7 +31,21 @@ public class AuthController: ControllerBase
         }
         catch (Exception ex)
         {
-            return Conflict(new {error = ex.Message});
+            return Conflict(new {error = ex.Message});            
+        }
+    }
+
+    [HttpPost("login")]
+    public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
+    {
+        try
+        {
+            var response = await _authservice.LoginAsync(request);
+            return Ok(response);
+        }
+        catch (UnauthorizedAccessException ex)
+        {            
+            return Unauthorized(new {error = ex.Message});
         }
     }
 }

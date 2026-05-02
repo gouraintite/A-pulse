@@ -8,12 +8,18 @@ namespace Apulse.Api.Services;
 public class AuthService:IAuthService
 {
     public readonly ApulseDbContext _context;
+    private readonly IJwtService _jwtService;
+    private readonly IConfiguration _configuration;
 
-    public AuthService(ApulseDbContext context)
+    public AuthService(
+        ApulseDbContext context,
+        IJwtService jwtService,
+        IConfiguration configuration)
     {
         _context = context;
+        _jwtService = jwtService;
+        _configuration = configuration;
     }
-
     public async Task<UserResponse> RegisterAsync(RegisterRequest request)
     {
         // Verifier que l'email n'existe pas déja
@@ -53,5 +59,36 @@ public class AuthService:IAuthService
             user.CreatedAt
         );
 
+    }
+
+    // login service
+    public async Task<LoginResponse> LoginAsync(LoginRequest request)
+    {
+        // Trouver le user
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == request.Email);
+
+        if (user is null)
+            throw new UnauthorizedAccessException("Invalid credentials.");
+
+        // Vérifier le password (BCrypt compare le hash)
+        var passwordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
+
+        if (!passwordValid)
+            throw new UnauthorizedAccessException("Invalid credentials.");
+
+        // Générer le token
+        var token = _jwtService.GenerateToken(user);
+        var expiryInMinutes = int.Parse(_configuration["Jwt:ExpiryInMinutes"] ?? "60");
+        var expiresAt = DateTime.UtcNow.AddMinutes(expiryInMinutes);
+
+        // Construire la réponse
+        var userResponse = new UserResponse(
+            user.Id, user.Email, user.FirstName, user.LastName,
+            user.Department, user.Role, user.CreatedAt
+        );
+
+        // la retourner
+        return new LoginResponse(token, expiresAt,userResponse);
     }
 }
