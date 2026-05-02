@@ -53,11 +53,20 @@ TemporaryDependencyNodeTargetIdentifier=net8.0
 /warnaserror+:NU1605,SYSLIB0011
 
 [sourceFiles]
-Controllers/UserController.cs
+Controllers/
+ AuthController.cs
+ UserController.cs
 Data/APulseDbContext.cs
+Dtos/Auth/
+ RegisterRequest.cs
+ UserResponse.cs
 Migrations/
  20260501114335_InitialCreate.cs
  20260501114335_InitialCreate.Designer.cs
+ 20260501152504_AddAuthRoleFieldsToUser.cs
+ 20260501152504_AddAuthRoleFieldsToUser.Designer.cs
+ 20260501175157_AddUserFields.cs
+ 20260501175157_AddUserFields.Designer.cs
  ApulseDbContextModelSnapshot.cs
 Models/User.cs
 obj/Debug/net8.0/
@@ -65,6 +74,9 @@ obj/Debug/net8.0/
  Apulse.API.AssemblyInfo.cs
  Apulse.API.GlobalUsings.g.cs
 Program.cs
+Services/
+ AuthService.cs
+ IAuthService.cs
 
 [metadataReferences]
 ../../../../../../../../usr/lib/dotnet/packs/Microsoft.AspNetCore.App.Ref/8.0.26/ref/net8.0/
@@ -373,6 +385,7 @@ Program.cs
 <NUGET>/
  azure.core/1.35.0/lib/net6.0/Azure.Core.dll
  azure.identity/1.10.3/lib/netstandard2.0/Azure.Identity.dll
+ bcrypt.net-next/4.0.3/lib/net6.0/BCrypt.Net-Next.dll
  microsoft.bcl.asyncinterfaces/6.0.0/lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll
  microsoft.data.sqlclient/5.1.5/ref/net6.0/Microsoft.Data.SqlClient.dll
  microsoft.entityframeworkcore.abstractions/8.0.10/lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll

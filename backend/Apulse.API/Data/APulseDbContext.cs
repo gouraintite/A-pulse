@@ -23,6 +23,8 @@ public class ApulseDbContext : DbContext
             entity.HasIndex(u => u.Email).IsUnique();
             entity.Property(u => u.FirstName).IsRequired().HasMaxLength(100);
             entity.Property(u => u.LastName).IsRequired().HasMaxLength(100);
+            entity.Property(u => u.PasswordHash).IsRequired();  
+            entity.Property(u => u.Role).IsRequired().HasMaxLength(20).HasDefaultValue("User");
             entity.Property(u => u.Department).HasMaxLength(100);
         });
     }

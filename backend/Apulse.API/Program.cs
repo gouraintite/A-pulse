@@ -1,4 +1,5 @@
 using Apulse.Api.Data;
+using Apulse.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<ApulseDbContext>(options =>
         builder.Configuration.GetConnectionString("defaultConnection")
     )
 );
+// Pour l'authentication
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
