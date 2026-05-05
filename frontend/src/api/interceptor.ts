@@ -16,7 +16,7 @@ export const apiClient = axios.create({
 
 // Interceptor add token JWT if exists
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('axa-pulse-token');
+  const token = localStorage.getItem('apulse-token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -29,7 +29,7 @@ apiClient.interceptors.response.use(
   (error: AxiosError) => {
     // Token expiré ou invalide → on déconnecte
     if (error.response?.status === 401) {
-      localStorage.removeItem('axa-pulse-token');
+      localStorage.removeItem('apulse-token');
       // On pourrait rediriger vers /login ici, on le fera via le contexte
     }
     return Promise.reject(error);

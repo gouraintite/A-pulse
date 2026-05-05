@@ -8,12 +8,12 @@ import type {
 
 export const authApi = {
   register: async (data: RegisterRequest): Promise<UserResponse> => {
-    const response = await apiClient.post<UserResponse>('/api/auth/register', data);
+    const response = await apiClient.post<UserResponse>('/api/Auth/register', data);
     return response.data;
   },
 
   login: async (data: LoginRequest): Promise<LoginResponse> => {
-    const response = await apiClient.post<LoginResponse>('/api/auth/login', data);
+    const response = await apiClient.post<LoginResponse>('/api/Auth/login', data);
     return response.data;
   },
 

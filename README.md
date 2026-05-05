@@ -1,4 +1,4 @@
-# AXA-pulse
+# apulse
 
 plateforme interne de feedback 360deg pour collaborateurs
 
@@ -6,12 +6,12 @@ plateforme interne de feedback 360deg pour collaborateurs
 
 ## Ojectif
 
-AXA-pulse permet à des managers ou RH de lancer des campagne de feedback 360deg sur un collaborateur afin de recolte les avis de ses N+1 et N-1, de façon anonyme, sécurisé et aidé d'un dashboard de suivi
+apulse permet à des managers ou RH de lancer des campagne de feedback 360deg sur un collaborateur afin de recolte les avis de ses N+1 et N-1, de façon anonyme, sécurisé et aidé d'un dashboard de suivi
 
 ## Architecture
 
 \`\`\`
-axa-pulse/
+apulse/
 |-- backend/ -> ASP Net 8 core (C# .Net)
 |-- Frontend/ -> SPA React 19 (TypeScript)
 |-- Docker/ -> Dockerfiles and dockercompose

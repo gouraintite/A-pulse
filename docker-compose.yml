@@ -1,6 +1,7 @@
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: a-pulse-sqlserver
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "Apulse2026!"
@@ -11,5 +12,52 @@ services:
       - sqlserver-data:/var/opt/mssql
     restart: 
       unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Apulse2026!' -C -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - a-pulse-network
+
+  backend:
+    build:
+      context: ./backend/Apulse.Api
+      dockerfile: Dockerfile
+    container_name: a-pulse-backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=ApulseDb;User Id=sa;Password=Apulse2026!;TrustServerCertificate=True;"
+      Jwt__Key: "ThisIsASuperLongSecretKeyForJwtSigningApulse2026ChangeMeInProduction"
+      Jwt__Issuer: "Apulse.Api"
+      Jwt__Audience: "Apulse.Client"
+      Jwt__ExpiryInMinutes: "60"
+    ports:
+      - "8080:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - a-pulse-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: "http://localhost:8080"
+    container_name: a-pulse-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - a-pulse-network
+
 volumes:
-  sqlserver-data:
+  sqlserver_data:
+
+networks:
+  a-pulse-network:
+    driver: bridge

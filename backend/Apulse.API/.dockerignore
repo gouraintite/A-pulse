@@ -1,0 +1,11 @@
+**/bin
+**/obj
+**/.vs
+**/.vscode
+**/Dockerfile
+**/.dockerignore
+**/.git
+**/.gitignore
+**/README.md
+**/Properties/launchSettings.json
+**/appsettings.Development.json

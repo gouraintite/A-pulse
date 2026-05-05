@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Apulse.Api.Controllers;
 
 [ApiController]
-[Authorize(Roles = "Admin")]
+// [Authorize]
 [Route("api/[controller]")]
 
 public class AuthController: ControllerBase

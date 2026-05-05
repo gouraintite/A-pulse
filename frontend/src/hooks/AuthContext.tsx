@@ -9,7 +9,7 @@ import {
 import { authApi } from '../api/auth';
 import type { LoginRequest, RegisterRequest, UserResponse } from '../types/auth';
 
-const TOKEN_STORAGE_KEY = 'axa-pulse-token';
+const TOKEN_STORAGE_KEY = 'apulse-token';
 
 type AuthContextValue = {
   user: UserResponse | null;
